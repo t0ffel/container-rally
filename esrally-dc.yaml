@@ -1,0 +1,41 @@
+apiVersion: v1
+kind: DeploymentConfig
+metadata:
+  labels:
+    cluster-name: elastic1
+    es-component: rally
+    logging-infra: debug
+    provider: openshift
+  name: elasticsearch-rally
+spec:
+  replicas: 1
+  selector:
+    cluster-name: elastic1
+    es-component: rally
+    provider: openshift
+  strategy:
+    resources: {}
+    rollingParams:
+      intervalSeconds: 1
+      maxSurge: 25%
+      maxUnavailable: 25%
+      timeoutSeconds: 600
+      updatePeriodSeconds: 1
+    type: Rolling
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        cluster-name: elastic1
+        es-component: rally
+        logging-infra: debug
+        provider: openshift
+      name: elasticsearch-rally
+    spec:
+      containers:
+      - args:
+        - bash
+        image: t0ffel/elasticsearch-rally
+        name: elasticsearch-rally
+        tty: true
+      restartPolicy: Always
