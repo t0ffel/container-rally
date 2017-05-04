@@ -1,0 +1,6 @@
+#!/bin/sh
+id
+
+. ${HOME}/run.sh
+
+#exec tail -f /dev/null
