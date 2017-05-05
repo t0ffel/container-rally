@@ -5,7 +5,8 @@ USER 0
 ENV HOME=/opt/app-root/src \
 	LC_ALL=en_US.UTF-8 \
 	RALLY_VER=0.5.3 \
-	TARGET_HOSTS=elastic1:9200
+	TARGET_HOSTS=elastic1:9200 \
+	JAVA_HOME=/usr/lib/jvm/jre-1.8.0
 
 # install the RPMs in a separate step so it can be cached
 RUN yum -y install epel-release centos-release-scl && \
