@@ -33,9 +33,17 @@ spec:
       name: elasticsearch-rally
     spec:
       containers:
-      - args:
-        - bash
-        image: t0ffel/elasticsearch-rally
+      - image: t0ffel/elasticsearch-rally
         name: elasticsearch-rally
         tty: true
+        env:
+        - name: TARGET_HOSTS
+          value: "hostmountedes:9200"
+        volumeMounts:
+        - name: benchmarks-dir
+          mountPath: /mnt/benchmarks
       restartPolicy: Always
+      volumes:
+      - name: benchmarks-dir
+        persistentVolumeClaim:
+          claimName: rally-store 
